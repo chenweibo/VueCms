@@ -15,6 +15,9 @@
 </template>
 
 <script>
+
+import checkPermission from '@/utils/permission' // 权限判断函数
+
 export default {
 
   data() {
@@ -68,6 +71,7 @@ export default {
   },
 
   methods: {
+    checkPermission,
     filterNode(value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1

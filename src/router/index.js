@@ -56,7 +56,7 @@ export const asyncRouterMap = [
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree', roles: ['admins'] }
+        meta: { title: 'Tree', icon: 'tree', roles: ['editor'] }
       }
     ]
   },
