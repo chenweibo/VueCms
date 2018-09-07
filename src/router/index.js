@@ -173,3 +173,9 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
+
+export const componentsMap = {
+  form: () => import('@/views/form/index')
+  // example_tree: () => import('@/views/tree/index'),
+  // form_index: () => import('@/views/form/index'),
+}
