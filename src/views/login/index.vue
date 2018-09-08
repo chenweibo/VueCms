@@ -37,17 +37,18 @@
 </template>
 
 <script>
-import { isvalidUsername } from '@/utils/validate'
+// import { isvalidUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('请输入正确的用户名'))
-      } else {
-        callback()
-      }
+      // if (!isvalidUsername(value)) {
+      //   callback(new Error('请输入正确的用户名'))
+      // } else {
+      //   callback()
+      // }
+      callback()
     }
     const validatePass = (rule, value, callback) => {
       if (value.length < 5) {
@@ -58,8 +59,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: 'admin'
+        username: '563960993@qq.com',
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
