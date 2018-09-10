@@ -39,8 +39,11 @@ function generateRouter(item, isParent) {
     name: item.name,
     meta: item.meta,
     // component: isParent ? Layout : () => import(item.component)
+    // component: isParent ? Layout : componentsMap[item.name]
     component: isParent ? Layout : componentsMap[item.name]
+
   }
+  console.log(item.component)
   return router
 }
 /**
@@ -83,6 +86,7 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { asyncRouterMap } = data
+        console.log(asyncRouterMap)
         const accessedRouters = convertRouter(asyncRouterMap)
         console.log(accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
