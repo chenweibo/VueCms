@@ -1,5 +1,5 @@
 <template>
-  <div v-if="errorLogs.length>0">
+  <div >
     <el-badge :is-dot="true" style="line-height: 30px;" @click.native="dialogTableVisible=true">
       <el-button size="small" type="danger" class="bug-btn">
         <svg
