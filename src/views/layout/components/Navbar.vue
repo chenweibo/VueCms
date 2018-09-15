@@ -4,7 +4,12 @@
       <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
       <breadcrumb />
       <div class="right-menu">
-        <error-log class="errLog-container right-menu-item"/>
+        <el-tooltip effect="dark" content="bug日志" placement="bottom">
+          <error-log class="errLog-container right-menu-item"/>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="全屏" placement="bottom">
+          <screenfull class="screenfull right-menu-item"/>
+        </el-tooltip>
         <el-dropdown class="avatar-container" trigger="click">
           <div class="avatar-wrapper">
             <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
@@ -30,17 +35,20 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import ErrorLog from '@/components/ErrorLog'
 import Hamburger from '@/components/Hamburger'
+import Screenfull from '@/components/Screenfull'
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
-    ErrorLog
+    ErrorLog,
+    Screenfull
   },
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'device'
     ])
   },
   methods: {
@@ -74,6 +82,9 @@ export default {
     display: inline-block;
     vertical-align: top;
   }
+      .screenfull {
+      height: 20px;
+    }
   .right-menu {
     float: right;
     height: 100%;
