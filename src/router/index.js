@@ -45,7 +45,7 @@ export default new Router({
 })
 
 export const componentsMap = {
-  Table: () => import('@/views/table/index'),
+  BaseSets: () => import('@/views/baseSets/index'),
   Tree: () => import('@/views/tree/index')
   // form_index: () => import('@/views/form/index'),
 }
