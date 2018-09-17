@@ -61,6 +61,11 @@ router.beforeEach((to, from, next) => {
       NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
     }
   }
+
+  if (to.meta.title) {
+    document.title = to.meta.title + '-网站后台管理'
+  }
+  next()
 })
 
 router.afterEach(() => {
