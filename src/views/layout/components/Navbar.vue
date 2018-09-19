@@ -7,6 +7,9 @@
         <el-tooltip effect="dark" content="bug日志" placement="bottom">
           <error-log class="errLog-container right-menu-item"/>
         </el-tooltip>
+        <el-tooltip effect="dark" content="清除缓存" placement="bottom">
+          <Cached class="right-menu-item cached" />
+        </el-tooltip>
         <el-tooltip effect="dark" content="全屏" placement="bottom">
           <screenfull class="screenfull right-menu-item"/>
         </el-tooltip>
@@ -36,13 +39,15 @@ import Breadcrumb from '@/components/Breadcrumb'
 import ErrorLog from '@/components/ErrorLog'
 import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
+import Cached from '@/components/Cached'
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
     ErrorLog,
-    Screenfull
+    Screenfull,
+    Cached
   },
   computed: {
     ...mapGetters([
@@ -65,6 +70,10 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+.cached{
+  vertical-align: top;
+  margin:0!important ;
+}
 .navbar {
   height: 50px;
   line-height: 50px;
