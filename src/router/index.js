@@ -46,6 +46,9 @@ export default new Router({
 
 export const componentsMap = {
   BaseSets: () => import('@/views/baseSets/index'),
-  Tree: () => import('@/views/tree/index')
+  Tree: () => import('@/views/tree/index'),
+  User: () => import('@/views/user/index'),
+  Person: () => import('@/views/person/index')
+
   // form_index: () => import('@/views/form/index'),
 }
