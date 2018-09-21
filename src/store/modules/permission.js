@@ -88,7 +88,7 @@ const permission = {
         const { asyncRouterMap } = data
         //  console.log(asyncRouterMap)
         const accessedRouters = convertRouter(asyncRouterMap)
-        //  console.log(accessedRouters)
+        console.log('accessedRouters' + accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

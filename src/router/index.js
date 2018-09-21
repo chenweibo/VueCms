@@ -48,7 +48,8 @@ export const componentsMap = {
   BaseSets: () => import('@/views/baseSets/index'),
   Tree: () => import('@/views/tree/index'),
   User: () => import('@/views/user/index'),
-  Person: () => import('@/views/person/index')
+  Person: () => import('@/views/person/index'),
+  Permissionlist: () => import('@/views/permission/index'),
+  Roles: () => import('@/views/roles/index')
 
-  // form_index: () => import('@/views/form/index'),
 }
