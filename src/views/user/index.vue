@@ -63,7 +63,7 @@
           <el-switch v-model="form.delivery"/>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button type="primary" >立即创建</el-button>
           <el-button @click="dialogFormVisible = false" >取消</el-button>
         </el-form-item>
       </el-form>

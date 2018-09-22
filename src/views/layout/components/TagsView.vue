@@ -14,9 +14,9 @@
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="closeSelectedTag(selectedTag)"> tagsView.close</li>
-      <li @click="closeOthersTags">tagsView.closeOthers</li>
-      <li @click="closeAllTags">tagsView.closeAll</li>
+      <li @click="closeSelectedTag(selectedTag)"> 关闭当前</li>
+      <li @click="closeOthersTags">关闭其他</li>
+      <li @click="closeAllTags">关闭所有</li>
     </ul>
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
       if (!route) {
         return false
       }
-      this.$store.dispatch('addVisitedViews', route)
+      this.$store.dispatch('addView', route)
     },
     moveToCurrentTag() {
       const tags = this.$refs.tag
@@ -77,15 +77,29 @@ export default {
         for (const tag of tags) {
           if (tag.to.path === this.$route.path) {
             this.$refs.scrollPane.moveToTarget(tag.$el)
+            // when query is different then update
+            if (tag.to.fullPath !== this.$route.fullPath) {
+              this.$store.dispatch('updateVisitedView', this.$route)
+            }
             break
           }
         }
       })
     },
+    refreshSelectedTag(view) {
+      this.$store.dispatch('delCachedView', view).then(() => {
+        const { fullPath } = view
+        this.$nextTick(() => {
+          this.$router.replace({
+            path: '/redirect' + fullPath
+          })
+        })
+      })
+    },
     closeSelectedTag(view) {
-      this.$store.dispatch('delVisitedViews', view).then((views) => {
+      this.$store.dispatch('delView', view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
-          const latestView = views.slice(-1)[0]
+          const latestView = visitedViews.slice(-1)[0]
           if (latestView) {
             this.$router.push(latestView)
           } else {

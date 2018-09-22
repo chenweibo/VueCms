@@ -43,9 +43,25 @@ function generateRouter(item, isParent) {
     component: isParent ? Layout : componentsMap[item.name]
 
   }
+
   // console.log(item.component)
   return router
 }
+
+function generateNameRouter(item, isParent) {
+  var router = {
+    path: item.path,
+    meta: item.meta,
+    // component: isParent ? Layout : () => import(item.component)
+    // component: isParent ? Layout : componentsMap[item.name]
+    component: isParent ? Layout : componentsMap[item.name]
+
+  }
+
+  // console.log(item.component)
+  return router
+}
+
 /**
  *将后台的路由表进行格式化
  * @param {*} asyncRouterMap
@@ -54,7 +70,7 @@ function convertRouter(asyncRouterMap) {
   const accessedRouters = []
   if (asyncRouterMap) {
     asyncRouterMap.forEach(item => {
-      var parent = generateRouter(item, true)
+      var parent = generateNameRouter(item, true)
       var children = []
       if (item.children) {
         item.children.forEach(child => {
@@ -88,7 +104,7 @@ const permission = {
         const { asyncRouterMap } = data
         //  console.log(asyncRouterMap)
         const accessedRouters = convertRouter(asyncRouterMap)
-        console.log('accessedRouters' + accessedRouters)
+        console.log(accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })
