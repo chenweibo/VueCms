@@ -50,6 +50,6 @@ export const componentsMap = {
   User: () => import('@/views/user/index'),
   Person: () => import('@/views/person/index'),
   Permissionlist: () => import('@/views/permission/index'),
-  Roles: () => import('@/views/roles/index')
-
+  Roles: () => import('@/views/roles/index'),
+  Message: () => import('@/views/message/index')
 }
