@@ -24,66 +24,83 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog :visible.sync="dialogFormVisible" title="权限分配" width="70%">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="角色名称">
-          <el-input v-model="form.name"/>
-        </el-form-item>
-
-        <el-form-item>
-          <el-button type="primary" >立即创建</el-button>
-          <el-button @click="dialogFormVisible = false" >取消</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    <el-dialog :visible.sync="dialogFormVisible" title="权限分配" width="90%" top="90px">
+      <tree-table :data="data" :eval-func="func" :eval-args="args" :expand-all="expandAll" border>
+        <el-table-column label="事件">
+          <template slot-scope="scope">
+            <span style="color:sandybrown">{{ scope.row.nav }}</span>
+            <el-tag>{{ scope.row.nav+'ms' }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="时间线">
+          <template slot-scope="scope">
+            <el-tooltip :content="scope.row.timeLine+'ms'" effect="dark" placement="left">
+              <div class="processContainer">
+                <div
+                  :style="{ width:scope.row._width * 500+'px',
+                            background:scope.row._width>0.5?'rgba(233,0,0,.5)':'rgba(0,0,233,0.5)',
+                            marginLeft:scope.row._marginLeft * 500+'px' }"
+                  class="process">
+                  <span style="display:inline-block"/>
+                </div>
+              </div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="200">
+          <template slot-scope="scope">
+            <el-button type="text" @click="message(scope.row)">点击</el-button>
+          </template>
+        </el-table-column>
+    </tree-table></el-dialog>
   </div>
 
 </template>
 
 <script>
+import treeTable from '@/components/TreeTable'
+import treeToArray from './customEval'
 export default {
   name: 'Role',
+  components: { treeTable },
   data() {
     return {
+
+      func: treeToArray,
+      expandAll: false,
       tableData: [{
         date: '1',
         name: '普通管理员'
 
       }], dialogFormVisible: false,
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+      value1: true,
+      value2: true,
+      data:
+        {
+          id: 1,
+          nav: '站点设置',
+          timeLine: 100,
+          comment: '无',
+          state: true,
+          children: [
+            {
+              id: 2,
+              nav: '基础设置',
+              timeLine: 10,
+              comment: '无',
+              state: false
+            }
+          ]
+        }, args: [null, null, 'timeLine']
 
     }
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row)
-    },
-    handleDelete(index, row) {
-      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
-      })
+    message(row) {
+      // this.$message.info(row.state)
+      console.log(this.data)
     }
+
   }
 
 }
