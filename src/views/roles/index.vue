@@ -24,34 +24,35 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog :visible.sync="dialogFormVisible" title="权限分配" width="90%" top="90px">
-      <tree-table :data="data" :eval-func="func" :eval-args="args" :expand-all="expandAll" border>
-        <el-table-column label="事件">
+    <el-dialog :visible.sync="dialogFormVisible" title="权限分配" top="90px">
+      <tree-table :data="data" :eval-func="func" :expand-all="expandAll" >
+        <el-table-column label="导航" width="80px" align="center">
           <template slot-scope="scope">
-            <span style="color:sandybrown">{{ scope.row.nav }}</span>
-            <el-tag>{{ scope.row.nav+'ms' }}</el-tag>
+            <span >{{ scope.row.nav }}</span>
+
           </template>
         </el-table-column>
-        <el-table-column label="时间线">
+        <el-table-column label="显示" width="80px" align="center">
           <template slot-scope="scope">
-            <el-tooltip :content="scope.row.timeLine+'ms'" effect="dark" placement="left">
-              <div class="processContainer">
-                <div
-                  :style="{ width:scope.row._width * 500+'px',
-                            background:scope.row._width>0.5?'rgba(233,0,0,.5)':'rgba(0,0,233,0.5)',
-                            marginLeft:scope.row._marginLeft * 500+'px' }"
-                  class="process">
-                  <span style="display:inline-block"/>
-                </div>
-              </div>
-            </el-tooltip>
+            <el-checkbox v-model="scope.row.show"/>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200">
+        <el-table-column label="添加" width="80px" align="center">
           <template slot-scope="scope">
-            <el-button type="text" @click="message(scope.row)">点击</el-button>
+            <el-checkbox v-model="scope.row.create"/>
           </template>
         </el-table-column>
+        <el-table-column label="编辑" width="80px" align="center">
+          <template slot-scope="scope">
+            <el-checkbox v-model="scope.row.edit"/>
+          </template>
+        </el-table-column>
+        <el-table-column label="删除" width="80px" align="center">
+          <template slot-scope="scope">
+            <el-checkbox v-model="scope.row.delete"/>
+          </template>
+        </el-table-column>
+
     </tree-table></el-dialog>
   </div>
 
@@ -72,9 +73,9 @@ export default {
         date: '1',
         name: '普通管理员'
 
-      }], dialogFormVisible: false,
-      value1: true,
-      value2: true,
+      }],
+      all: false,
+      dialogFormVisible: false,
       data:
         {
           id: 1,
@@ -82,16 +83,25 @@ export default {
           timeLine: 100,
           comment: '无',
           state: true,
+          show: true,
+          create: true,
+          edit: true,
+          delete: true,
+
           children: [
             {
               id: 2,
               nav: '基础设置',
               timeLine: 10,
               comment: '无',
-              state: false
+              state: false,
+              show: true,
+              create: true,
+              edit: true,
+              delete: true
             }
           ]
-        }, args: [null, null, 'timeLine']
+        }
 
     }
   },
