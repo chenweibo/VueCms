@@ -40,7 +40,8 @@ function generateRouter(item, isParent) {
     meta: item.meta,
     // component: isParent ? Layout : () => import(item.component)
     // component: isParent ? Layout : componentsMap[item.name]
-    component: isParent ? Layout : componentsMap[item.name]
+    component: isParent ? Layout : componentsMap[item.name],
+    hidden: !!item.hidden
 
   }
 
