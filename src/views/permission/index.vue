@@ -2,7 +2,7 @@
 
   <div class="app-container">
     <div class="filter-container">
-      <el-button class="filter-item" type="primary" size="small" icon="el-icon-edit" @click="dialogFormVisible = true" >添加</el-button>
+      <el-button class="filter-item" type="primary" size="mini" icon="el-icon-edit" @click="dialogFormVisible = true" >添加</el-button>
     </div>
     <el-table
       :data="tableData"
