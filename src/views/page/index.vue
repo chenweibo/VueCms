@@ -21,6 +21,13 @@
       <el-table-column
         prop="address"
         label="地址"/>
+      <el-table-column label="操作" width="80">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+          >编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
