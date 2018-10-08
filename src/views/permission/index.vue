@@ -18,7 +18,6 @@
         label="角色名称"
         width="100%"/>
       <el-table-column
-
         label="操作">
         <template slot-scope="scope">
           <el-button
@@ -36,7 +35,6 @@
         <el-form-item label="角色名称">
           <el-input v-model="form.name"/>
         </el-form-item>
-
         <el-form-item>
           <el-button type="primary" >立即创建</el-button>
           <el-button @click="dialogFormVisible = false" >取消</el-button>
@@ -44,7 +42,6 @@
       </el-form>
     </el-dialog>
   </div>
-
 </template>
 
 <script>
