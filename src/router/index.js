@@ -53,5 +53,7 @@ export const componentsMap = {
   Roles: () => import('@/views/roles/index'),
   Message: () => import('@/views/message/index'),
   Page: () => import('@/views/page/index'),
-  PageCreate: () => import('@/views/page/create')
+  PageCreate: () => import('@/views/page/create'),
+  ArticleCate: () => import('@/views/article/articlecate/index'),
+  ArticleList: () => import('@/views/article/articlelist/index')
 }
