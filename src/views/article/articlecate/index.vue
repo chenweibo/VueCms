@@ -1,6 +1,11 @@
 <template>
   <div class="app-container">
-    <tree-table :data="data" :columns="columns" >
+    <div class="filter-container">
+
+      <el-button class="filter-item" type="primary" size="mini" icon="el-icon-edit" @click="dialogVisible = true" >添加</el-button>
+
+    </div>
+    <tree-table :data="data" :columns="columns" border >
       <el-table-column
         label="操作">
         <template slot-scope="scope">
@@ -14,7 +19,45 @@
         </template>
       </el-table-column>
     </tree-table>
+    <el-dialog
+      :visible.sync="dialogVisible"
+      :before-close="handleClose"
+      title="创建类目"
+      width="60%">
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="类目名称">
+          <el-input v-model="form.name"/>
+        </el-form-item>
+        <el-form-item label="分类">
+          <el-select v-model="form.region" placeholder="请选择分类">
+            <el-option label="顶级分类" value="0"/>
+            <el-option label="测试分类1" value="123123"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="排序">
+          <el-input v-model="form.sort" placeholder="排序" style="width:200px"/>
+        </el-form-item>
+        <el-form-item label="缩略图">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple>
+            <i class="el-icon-upload"/>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+
+      <span slot="footer" class="dialog-footer">
+
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
+
 </template>
 
 <script>
@@ -25,6 +68,18 @@ export default {
   components: { treeTable },
   data() {
     return {
+      dialogVisible: false,
+      form: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        sort: '99'
+      },
+
       columns: [
         {
           text: '事件',
@@ -132,6 +187,14 @@ export default {
     handleEdit(index, row) {
       console.log(index, row)
     },
+
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {})
+    },
     handleDelete(index, row) {
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -152,3 +215,8 @@ export default {
   }
 }
 </script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+ .filter-container{
+       padding-bottom: 10px;
+ }
+</style>
