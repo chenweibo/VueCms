@@ -10,7 +10,9 @@
           :value="item.value"/>
       </el-select>
       <el-button v-waves class="filter-item" type="primary" size="medium" icon="el-icon-search" >搜索</el-button>
-      <el-button v-waves class="filter-item" style="margin-left: 10px;" size="medium" type="primary" icon="el-icon-edit" >添加</el-button>
+      <router-link :to="'/article/create'" class="link-type">
+        <el-button v-waves class="filter-item" style="margin-left: 10px;" size="medium" type="primary" icon="el-icon-edit" >添加</el-button>
+      </router-link>
       <el-button v-waves :loading="downloadLoading" class="filter-item" size="medium" type="primary" icon="el-icon-download">导出</el-button>
 
     </div>
