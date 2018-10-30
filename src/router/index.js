@@ -56,5 +56,5 @@ export const componentsMap = {
   PageCreate: () => import('@/views/page/create'),
   ArticleCate: () => import('@/views/article/articlecate/index'),
   ArticleList: () => import('@/views/article/articlelist/index'),
-  ArticleCreate: () => import('@/views/article/articlelist/create')
+  ProjectCate: () => import('@/views/project/projectcate/index')
 }
