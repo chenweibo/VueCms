@@ -8,7 +8,7 @@
     </el-breadcrumb>
     <div class="line"/>
     <div class="filter-container">
-      <el-button v-waves class="filter-item" type="primary" size="mini" >上传</el-button>
+      <el-button class="filter-item" type="primary" size="mini" >上传</el-button>
     </div>
     <el-table
       :data="tableData"
@@ -16,11 +16,16 @@
       <el-table-column
         prop="date"
         label="文件名"
-        width="180"/>
+      >
+        <template slot-scope="scope">
+          <svg-icon icon-class="folder"/>
+          <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="name"
         label="大小"
-        width="180"/>
+      />
       <el-table-column
         prop="address"
         label="修改时间"/>
@@ -37,8 +42,8 @@ export default {
     return {
       tableData: [{
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
+        name: '200k',
+        address: '2018.4.12',
         cc: '11'
       }]
     }
