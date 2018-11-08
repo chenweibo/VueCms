@@ -18,7 +18,7 @@
         label="文件名"
       >
         <template slot-scope="scope">
-          <svg-icon icon-class="folder"/>
+          <svg-icon icon-class="folder" class="w"/>
           <span style="margin-left: 10px">{{ scope.row.date }}</span>
         </template>
       </el-table-column>
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       tableData: [{
-        date: '2016-05-02',
+        date: 'app',
         name: '200k',
         address: '2018.4.12',
         cc: '11'
@@ -57,6 +57,13 @@ export default {
    width: 100%;
    border-top: 1px solid #f0f0f0;
    margin: 20px 0 10px 0;
+
+}
+.w{
+  width: 25px;
+  height: 25px;
+ padding-top: 7px;
+
 }
 </style>
 

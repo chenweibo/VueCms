@@ -39,7 +39,7 @@ service.interceptors.response.use(
       })
 
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-      if (res.code === 504 || res.code === 500 || res.code === 50014) {
+      if (res.code === 504 || res.code === 500 || res.code === 50014 || res.status_code === 401) {
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
           '确定登出',
