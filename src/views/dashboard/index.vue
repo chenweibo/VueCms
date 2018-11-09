@@ -4,29 +4,37 @@
       <el-row :gutter="32">
         <el-col :xs="24" :sm="24" :lg="8">
           <div class="chart-wrapper">
-            <ve-pie :data="chartData"/>
+
+            <ve-pie :data="chartData" :settings="chartSettings" />
           </div>
         </el-col>
         <el-col :xs="24" :sm="24" :lg="8">
           <div class="chart-wrapper">
-            <ve-pie :data="chartData"/>
+            <ve-histogram :data="zhudata" :settings="zhu" />
           </div>
         </el-col>
         <el-col :xs="24" :sm="24" :lg="8">
           <div class="chart-wrapper">
-            <ve-pie :data="chartData"/>
+            <ve-line :data="chartData"/>
           </div>
         </el-col>
       </el-row>
     </div>
+
   </div>
+
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Dashboard',
   data() {
+    this.chartSettings = {
+      roseType: 'radius'
+    }
+    this.zhu = {
+      stack: { '用户': ['访问用户', '下单用户'] }
+    }
     return {
       chartData: {
         columns: ['日期', '访问用户'],
@@ -38,15 +46,35 @@ export default {
           { '日期': '1/5', '访问用户': 3792 },
           { '日期': '1/6', '访问用户': 4593 }
         ]
+      },
+      zhudata: {
+        columns: ['日期', '访问用户', '下单用户', '下单率'],
+        rows: [
+          { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
+          { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
+          { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
+          { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
+          { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
+          { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
+        ]
       }
     }
   },
-  computed: {
-    ...mapGetters([
-      'name',
-      'roles'
-    ])
+  mounted() {
+    this.open()
+  },
+  methods: {
+    open() {
+      const h = this.$createElement
+      this.$notify({
+        title: '欢迎登陆网站后台',
+        duration: 2500,
+        offset: 40,
+        message: h('i', { style: 'color: teal' }, '如有bug联系:563960993@qq.com')
+      })
+    }
   }
+
 }
 </script>
 
