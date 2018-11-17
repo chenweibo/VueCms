@@ -37,7 +37,6 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
-
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
       if (res.code === 504 || res.code === 5004 || res.code === 50014 || res.status_code === 401) {
         MessageBox.confirm(
@@ -60,12 +59,29 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
+    // console.log('err' + error) // for debug
+    // Message({
+    //   message: error.message,
+    //   type: 'error',
+    //   duration: 5 * 1000
+    // })
+    const status = error.response.status
+    if (status === 504 || status === 5004 || status === 404 || status === 401) {
+      MessageBox.confirm(
+        '你已被登出，可以取消继续留在该页面，或者重新登录',
+        '确定登出',
+        {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).then(() => {
+        store.dispatch('FedLogOut').then(() => {
+          location.reload() // 为了重新实例化vue-router对象 避免bug
+        })
+      })
+    }
+
     return Promise.reject(error)
   }
 )
